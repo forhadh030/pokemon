@@ -1,5 +1,7 @@
 package org.pokemon;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.*;
 
 public class pokemonBuilder implements mechanism {
@@ -46,15 +48,42 @@ public class pokemonBuilder implements mechanism {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the pokemon you want: ");
-        System.out.println("\n1 - Charmander");
-        System.out.println("2 - Squirtle");
-        System.out.println("3 - Bulbasaur");
+        System.out.println("\n1 - Pikachu");
+        System.out.println("2 - Charmander");
+        System.out.println("3 - Squirtle");
+        System.out.println("4 - Bulbasaur");
+        System.out.println("5 - Go Back");
         int pokemonName = scanner.nextInt();
-
         switch (pokemonName) {
-            case 1 -> charmanderStats();
-            case 2 -> squirtleStats();
-            case 3 -> bulbasaurStats();
+            case 1 -> {
+                if (!pokemon.containsKey("Pikachu")) {
+                    pikachuStats();
+                } else {
+                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                }
+            }
+            case 2 -> {
+                if (!pokemon.containsKey("Charmander")) {
+                    charmanderStats();
+                } else {
+                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                }
+            }
+            case 3 -> {
+                if (!pokemon.containsKey("Squirtle")) {
+                    squirtleStats();
+                } else {
+                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                }
+            }
+            case 4 -> {
+                if (!pokemon.containsKey("Bulbasaur")) {
+                    bulbasaurStats();
+                } else {
+                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                }
+            }
+            case 5 -> scanner.nextLine();
             default -> System.out.println("Invalid input. Please try again.");
         }
     }
@@ -64,6 +93,24 @@ public class pokemonBuilder implements mechanism {
 
     }
 
+    @Override
+    public void pikachuStats() {
+        try {
+            int HP = (int) (180 + Math.random() * (274 - 180 + 1));
+            int atkDmg = (int) (103 + Math.random() * (229 - 103 + 1));
+            int def = (int) (76 + Math.random() * (196 - 76 + 1));
+            int speed = (int) (166 + Math.random() * (306 - 166 + 1));
+
+            PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
+
+            pokemon.put("Pikachu", stats);
+            System.out.println();
+            displayPokemon();
+            System.out.println();
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
     @Override
     public void charmanderStats() {
         try {
@@ -75,7 +122,9 @@ public class pokemonBuilder implements mechanism {
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
             pokemon.put("Charmander", stats);
-            System.out.println(pokemon.get("Charmander"));
+            System.out.println();
+            displayPokemon();
+            System.out.println();
         } catch (NullPointerException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
@@ -92,7 +141,9 @@ public class pokemonBuilder implements mechanism {
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
             pokemon.put("Squirtle", stats);
-            System.out.println(pokemon.get("Squirtle"));
+            System.out.println();
+            displayPokemon();
+            System.out.println();
         } catch (NullPointerException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
@@ -109,7 +160,9 @@ public class pokemonBuilder implements mechanism {
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
             pokemon.put("Bulbasaurs", stats);
-            System.out.println(pokemon.get("Bulbasaurs"));
+            System.out.println();
+            displayPokemon();
+            System.out.println();
         } catch (NullPointerException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
