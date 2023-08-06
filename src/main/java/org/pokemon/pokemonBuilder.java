@@ -1,11 +1,9 @@
 package org.pokemon;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
 
 public class pokemonBuilder implements mechanism {
-    private HashMap<String, PokemonStats> pokemon = new HashMap<>();
+    private final TreeMap<String, PokemonStats> pokemon = new TreeMap<>();
     private int HP;
     private int atkDmg;
     private int def;
@@ -54,37 +52,42 @@ public class pokemonBuilder implements mechanism {
         System.out.println("4 - Bulbasaur");
         System.out.println("5 - Go Back");
         int pokemonName = scanner.nextInt();
-        switch (pokemonName) {
-            case 1 -> {
-                if (!pokemon.containsKey("Pikachu")) {
-                    pikachuStats();
-                } else {
-                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+
+        try {
+            switch (pokemonName) {
+                case 1 -> {
+                    if (!pokemon.containsKey("Pikachu")) {
+                        pikachuStats();
+                    } else {
+                        System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                    }
                 }
-            }
-            case 2 -> {
-                if (!pokemon.containsKey("Charmander")) {
-                    charmanderStats();
-                } else {
-                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                case 2 -> {
+                    if (!pokemon.containsKey("Charmander")) {
+                        charmanderStats();
+                    } else {
+                        System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                    }
                 }
-            }
-            case 3 -> {
-                if (!pokemon.containsKey("Squirtle")) {
-                    squirtleStats();
-                } else {
-                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                case 3 -> {
+                    if (!pokemon.containsKey("Squirtle")) {
+                        squirtleStats();
+                    } else {
+                        System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                    }
                 }
-            }
-            case 4 -> {
-                if (!pokemon.containsKey("Bulbasaur")) {
-                    bulbasaurStats();
-                } else {
-                    System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                case 4 -> {
+                    if (!pokemon.containsKey("Bulbasaur")) {
+                        bulbasaurStats();
+                    } else {
+                        System.out.println("\nYou Already Have This Pokemon Doofus!\n");
+                    }
                 }
+                case 5 -> scanner.nextLine();
+                default -> System.out.println("Invalid option. Learn to read please.");
             }
-            case 5 -> scanner.nextLine();
-            default -> System.out.println("Invalid input. Please try again.");
+        } catch (InputMismatchException e) {
+            System.out.println("Looks like you need a reading course. Try again Doofus.");
         }
     }
 
@@ -96,10 +99,10 @@ public class pokemonBuilder implements mechanism {
     @Override
     public void pikachuStats() {
         try {
-            int HP = (int) (180 + Math.random() * (274 - 180 + 1));
-            int atkDmg = (int) (103 + Math.random() * (229 - 103 + 1));
-            int def = (int) (76 + Math.random() * (196 - 76 + 1));
-            int speed = (int) (166 + Math.random() * (306 - 166 + 1));
+            setHP((int) (180 + Math.random() * (274 - 180 + 1)));
+            setAtkDmg((int) (103 + Math.random() * (229 - 103 + 1)));
+            setDef((int) (76 + Math.random() * (196 - 76 + 1)));
+            setSpeed((int) (166 + Math.random() * (306 - 166 + 1)));
 
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
@@ -114,10 +117,10 @@ public class pokemonBuilder implements mechanism {
     @Override
     public void charmanderStats() {
         try {
-            int HP = (int) (188 + Math.random() * (282 - 188 + 1));
-            int atkDmg = (int) (98 + Math.random() * (223 - 98 + 1));
-            int def = (int) (81 + Math.random() * (203 - 81 + 1));
-            int speed = (int) (121 + Math.random() * (251 - 121 + 1));
+            setHP((int) (188 + Math.random() * (282 - 188 + 1)));
+            setAtkDmg((int) (98 + Math.random() * (223 - 98 + 1)));
+            setDef((int) (81 + Math.random() * (203 - 81 + 1)));
+            setSpeed((int) (121 + Math.random() * (251 - 121 + 1)));
 
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
@@ -133,10 +136,10 @@ public class pokemonBuilder implements mechanism {
     @Override
     public void squirtleStats() {
         try {
-            int HP = (int) (198 + Math.random() * (292 - 198 + 1));
-            int atkDmg = (int) (90 + Math.random() * (214 - 90 + 1));
-            int def = (int) (121 + Math.random() * (251 - 121 + 1));
-            int speed = (int) (81 + Math.random() * (203 - 81 + 1));
+            setHP((int) (198 + Math.random() * (292 - 198 + 1)));
+            setAtkDmg((int) (90 + Math.random() * (214 - 90 + 1)));
+            setDef((int) (121 + Math.random() * (251 - 121 + 1)));
+            setSpeed((int) (81 + Math.random() * (203 - 81 + 1)));
 
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
@@ -152,14 +155,14 @@ public class pokemonBuilder implements mechanism {
     @Override
     public void bulbasaurStats() {
         try {
-            int HP = (int) (200 + Math.random() * (294 - 200 + 1));
-            int atkDmg = (int) (92 + Math.random() * (216 - 92 + 1));
-            int def = (int) (92 + Math.random() * (216 - 92 + 1));
-            int speed = (int) (85 + Math.random() * (207 - 85 + 1));
+            setHP((int) (200 + Math.random() * (294 - 200 + 1)));
+            setAtkDmg((int) (92 + Math.random() * (216 - 92 + 1)));
+            setDef((int) (92 + Math.random() * (216 - 92 + 1)));
+            setSpeed((int) (85 + Math.random() * (207 - 85 + 1)));
 
             PokemonStats stats = new PokemonStats(HP, atkDmg, def, speed);
 
-            pokemon.put("Bulbasaurs", stats);
+            pokemon.put("Bulbasaur", stats);
             System.out.println();
             displayPokemon();
             System.out.println();
@@ -178,7 +181,8 @@ public class pokemonBuilder implements mechanism {
             System.out.println("ATK: " + stats.getAtkDmg());
             System.out.println("DEF: " + stats.getDef());
             System.out.println("SPEED: " + stats.getSpeed());
-            // Calculate and display the total stats if needed
+            System.out.println("TOTAL STATS: " +
+                    (stats.getHP() + stats.getAtkDmg() + stats.getDef() + stats.getSpeed()) / 4);
             System.out.println("------------");
         }
     }
